@@ -1,0 +1,23 @@
+{
+  "name": "error_count2",
+  "description": "Errors in syslog.",
+  "filter": "resource.type=\"k8s_container\"\nresource.labels.location=\"europe-west4\"\njsonPayload.logType=\"pspIntegration\"\njsonPayload.message=\"ACI request completed successfully\"",
+  "valueExtractor": "EXTRACT(jsonPayload.timeSpentMs)",
+  "labelExtractors": {
+    "PSP": "EXTRACT(jsonPayload.pspName)",
+    "pspOperationName": "EXTRACT(jsonPayload.pspOperationName)"
+  },
+  "metricDescriptor": {
+    "labels": [
+      {
+        "key": "pspOperationName"
+      },
+      {
+        "key": "PSP"
+      }
+    ],
+    "metricKind": "DELTA",    
+    "type": "logging.googleapis.com/user/aciOperationTimeSpentMs",
+    "valueType": "DISTRIBUTION"
+  }
+}
